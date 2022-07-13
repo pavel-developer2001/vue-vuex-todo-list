@@ -26,9 +26,6 @@ export const todoModule = {
     deleteTodo(state, id) {
       state.todos = state.todos.filter((item) => item.id !== id);
     },
-    updateTodo(state, todo) {
-      state.todo = todo;
-    },
   },
   actions: {
     async getTodos({ state, commit }) {
@@ -70,7 +67,7 @@ export const todoModule = {
     async updateTodo({ state, commit }, todo) {
       try {
         const up = await TodoApi.updateTodo(todo);
-        commit("updateTodo", up.data);
+        commit("setTodo", up.data);
       } catch (error) {
         commit("setError", error.message);
       }
